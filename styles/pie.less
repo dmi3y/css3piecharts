@@ -1,0 +1,145 @@
+@fillDegree: 0deg; // from 0deg to 180deg
+@baseRotate: 0deg;
+@baseBackground: orange;
+@pieBackground: green;
+
+@_afterRotate: @fillDegree;
+@_baseRotate: @baseRotate + 45;
+
+@__afterRotate: @fillDegree - 45deg;
+@__baseRotate:  @baseRotate;
+
+
+.outer(@fillDegree) when (@fillDegree < 45deg) {
+  background: @baseBackground;
+  -webkit-transform: rotate(@_baseRotate);
+  -moz-transform: rotate(@_baseRotate);
+  -ms-transform: rotate(@_baseRotate);
+  transform: rotate(@_baseRotate);
+}
+.outer(@fillDegree) when (@fillDegree >= 45deg) {
+  background: @baseBackground;
+  -webkit-transform: rotate(@__baseRotate);
+  -moz-transform: rotate(@__baseRotate);
+  -ms-transform: rotate(@__baseRotate);
+  transform: rotate(@__baseRotate);
+}
+.outer(@fillDegree) when (@fillDegree > 90deg) {
+  background: @pieBackground;
+  -webkit-transform: rotate(@__baseRotate);
+  -moz-transform: rotate(@__baseRotate);
+  -ms-transform: rotate(@__baseRotate);
+  transform: rotate(@__baseRotate);
+}
+.outer(@fillDegree) when (@fillDegree >= 135deg) {
+  background: @pieBackground;
+  -webkit-transform: rotate(@__baseRotate - 45deg);
+  -moz-transform: rotate(@__baseRotate - 45deg);
+  -ms-transform: rotate(@__baseRotate - 45deg);
+  transform: rotate(@__baseRotate - 45deg);
+}
+
+.pie(@fillDegree) when (@fillDegree < 45deg) {
+  border-bottom-color: @pieBackground;
+  -webkit-transform: rotate(-@_afterRotate);
+  -moz-transform: rotate(-@_afterRotate);
+  -ms-transform: rotate(-@_afterRotate);
+  transform: rotate(-@_afterRotate);
+}
+.pie(@fillDegree) when (@fillDegree >= 45deg) {
+  border-bottom-color: @pieBackground;
+  -webkit-transform: rotate(-@__afterRotate);
+  -moz-transform: rotate(-@__afterRotate);
+  -ms-transform: rotate(-@__afterRotate);
+  transform: rotate(-@__afterRotate);
+}
+.pie(@fillDegree) when (@fillDegree > 90deg) {
+  border-bottom-color: @baseBackground;
+  -webkit-transform: rotate(-@__afterRotate - 90deg);
+  -moz-transform: rotate(-@__afterRotate - 90deg);
+  -ms-transform: rotate(-@__afterRotate - 90deg);
+  transform: rotate(-@__afterRotate - 90deg);
+}
+.pie(@fillDegree) when (@fillDegree >= 135deg) {
+  border-bottom-color: @baseBackground;
+  -webkit-transform: rotate(-@_afterRotate);
+  -moz-transform: rotate(-@_afterRotate);
+  -ms-transform: rotate(-@_afterRotate);
+  transform: rotate(-@_afterRotate);
+}
+.pie(@fillDegree) when (@fillDegree = 180deg) {
+  border-bottom-color: @pieBackground;
+}
+.pie(@fillDegree) when (@fillDegree = 0deg) {
+  border-bottom-color: @baseBackground;
+}
+
+.after(@fillDegree) when (@fillDegree < 45deg) {
+  border-bottom-color: @baseBackground;
+  -webkit-transform: rotate(@_afterRotate);
+  -moz-transform: rotate(@_afterRotate);
+  -moz-transform: rotate(@_afterRotate);
+  -ms-transform: rotate(@_afterRotate);
+  transform: rotate(@_afterRotate);
+}
+.after(@fillDegree) when (@fillDegree >= 45deg) {
+  border-bottom-color: @pieBackground;
+  -webkit-transform: rotate(@__afterRotate);
+  -moz-transform: rotate(@__afterRotate);
+  -ms-transform: rotate(@__afterRotate);
+  transform: rotate(@__afterRotate);
+}
+.after(@fillDegree) when (@fillDegree > 90deg) {
+  border-bottom-color: @baseBackground;
+  -webkit-transform: rotate(@__afterRotate + 90deg);
+  -moz-transform: rotate(@__afterRotate + 90deg);
+  -ms-transform: rotate(@__afterRotate + 90deg);
+  transform: rotate(@__afterRotate + 90deg);
+}
+.after(@fillDegree) when (@fillDegree >= 135deg) {
+  border-bottom-color: @pieBackground;
+  -webkit-transform: rotate(@_afterRotate);
+  -moz-transform: rotate(@_afterRotate);
+  -ms-transform: rotate(@_afterRotate);
+  transform: rotate(@_afterRotate);
+}
+
+.circle {
+  .outer(@fillDegree);
+  width:260px;
+  height:260px;
+  border-radius:130px;
+  border: 1px solid #000;
+  position: relative;
+  overflow: hidden;
+  
+  &::after,
+  &::before {
+    border: 130px solid transparent;
+    .pie(@fillDegree);
+    content: '';
+    position: absolute;
+    top: 0px; right: 0px; 
+    bottom: 0px; left: 0px;
+    border-radius: 130px;
+  }
+  &::after {
+    .after(@fillDegree);
+  }
+}
+.legend {
+    margin-left: 20px;
+    display: none;
+    
+    span {
+        padding-left: 5px;
+    }
+    &::before {
+        content: '';
+        float: left;
+        margin-right: 5px;
+        width: 15px;
+        padding-bottom: 15px;
+        background: @pieBackground;
+    }    
+}
