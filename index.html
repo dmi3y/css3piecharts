@@ -3,16 +3,17 @@
     <head>
         <title>CSS3 PIE</title>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+        <link rel="stylesheet/less" type="text/css" href="styles/pie.less" />
         <script src="scripts/less.js" type="text/javascript"></script>
         <style type="text/less" id="lessPie">
-            @import 'styles/pie';
+            @import 'styles/pieDegree';
             @fillDegree: #dataDegree#; // from 0deg to 180deg
             @baseRotate: 40deg;
         </style>
         <script src="scripts/pie.js" type="text/javascript"></script>
     </head>
     <body>
-         <div class="circle" id="pieOne" data-fill="30deg"></div>
+         <div class="pie fill30deg" id="pieOne" data-fill="30deg"></div>
          <div class="legend" id="pieOneLegend">Some kind value<span></span></div>
     </body>
 </html>

@@ -1,8 +1,10 @@
 // prototype on jsbin http://jsbin.com/ijolib/15/edit
-! function() {
+!function() {
     var lessPieText = $('#lessPie').text();
     $(function() {
         var pieOneDataFill = $('#pieOne').attr('data-fill');
+        
+        
         while (parseInt(pieOneDataFill) > 180) {
             pieOneDataFill = (parseInt(pieOneDataFill) - 180) + 'deg';
         }
@@ -16,8 +18,8 @@
         // 180deg         = 100%
         // pieOneDataFill = x%
 
-        var percentValue = (parseInt(pieOneDataFill) * 100) / 180;
-        $('#pieOneLegend').find('span').text(Math.floor(percentValue) + '%').end().show();
+        var showValue = Math.floor((parseInt(pieOneDataFill) * 100) / 180) + '%';
+        $('#pieOneLegend').find('span').text(showValue).end().show();
 
     });
 }()
