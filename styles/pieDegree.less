@@ -3,28 +3,21 @@
 @baseBackground: orange;
 @pieBackground: green;
 
-@_afterRotate: @fillDegree;
-@_baseRotate: @baseRotate + 45deg;
-
-@__afterRotate: @fillDegree - 45deg;
-@__baseRotate:  @baseRotate;
-
-
 @import '_degreeGuards';
 
 .fill@{fillDegree} {
-  .outer(@fillDegree);
-  
-  &::after,
-  &::before {
-    .pie(@fillDegree);
-  }
-  &::after {
-    .after(@fillDegree);
-  }
-}
-.legend {
+    .outer(@fillDegree);
+    
+    &::after,
     &::before {
-        background: @pieBackground;
-    }    
+    .pie(@fillDegree);
+    }
+    &::after {
+    .after(@fillDegree);
+    }
+    & + .pieChartLegend {
+        &::before {
+            background: @pieBackground;
+        }    
+    }
 }

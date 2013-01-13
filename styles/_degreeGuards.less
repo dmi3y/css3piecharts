@@ -1,3 +1,9 @@
+@_afterRotate: @fillDegree;
+@_baseRotate: @baseRotate + 45deg;
+
+@__afterRotate: @fillDegree - 45deg;
+@__baseRotate:  @baseRotate;
+
 .outer(@fillDegree) when (@fillDegree < 45deg) {
   background: @baseBackground;
   -webkit-transform: rotate(@_baseRotate);

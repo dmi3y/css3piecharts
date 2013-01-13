@@ -1,25 +1,35 @@
 // prototype on jsbin http://jsbin.com/ijolib/15/edit
-!function() {
-    var lessPieText = $('#lessPie').text();
-    $(function() {
-        var pieOneDataFill = $('#pieOne').attr('data-fill');
+$(function() {
+    var styleTemplate = '<style rel="stylesheet/less" type="text/less">' +
+                            '@import "styles/pieDegree";'+
+                            '@fillDegree:#fillDegree#;'+
+                        '</style>';
+    $('.pieChart').each(function(){
+        var pieChart = $(this),
+            dataFill = pieChart.attr('data-fill'),
+            dataFillParsed = parseInt(dataFill);
         
         
-        while (parseInt(pieOneDataFill) > 180) {
-            pieOneDataFill = (parseInt(pieOneDataFill) - 180) + 'deg';
+        while (dataFillParsed > 180) {
+            dataFillParsed = dataFillParsed - 180;
         }
-        while (parseInt(pieOneDataFill) < 0) {
-            pieOneDataFill = (parseInt(pieOneDataFill) + 180) + 'deg';
+        while (dataFillParsed < 0) {
+            dataFillParsed = dataFillParsed + 180;
         }
-        $('#lessPie').text(lessPieText.replace('#dataDegree#', pieOneDataFill));
-        less.refreshStyles();
-
+        
+        dataFill = dataFillParsed + 'deg';
+        pieChart.addClass('fill'+dataFill);
+        
+        var styleInject = styleTemplate.replace('#fillDegree#', dataFill);
+        
+        $('head').append(styleInject);
+        
         // update % value
         // 180deg         = 100%
         // pieOneDataFill = x%
-
-        var showValue = Math.floor((parseInt(pieOneDataFill) * 100) / 180) + '%';
-        $('#pieOneLegend').find('span').text(showValue).end().show();
-
+        var showValue = Math.floor((dataFillParsed * 100) / 180) + '%';
+        
+        pieChart.next('.pieChartLegend').find('span').text(showValue).end().show();
     });
-}()
+    less.refreshStyles();
+});
