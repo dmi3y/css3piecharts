@@ -3,8 +3,8 @@ ptototype: http://jsbin.com/ijolib/15/edit
 
 **INTRO**
 
-Yes, there is much efficient ways to display charts, like SVG/VML, or even canvas, but why not have fun and make something with the just html elements?
+Yes, there is much efficient ways to display pie charts, like SVG/VML and canvas, but why not have fun and make something with the just html elements?
 
-**REFERENCES**
+**REFERENCES**  
 http://www.kylejlarson.com/blog/2011/how-to-create-pie-charts-with-css3/  
 https://developers.google.com/chart/
